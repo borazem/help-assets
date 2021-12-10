@@ -1,5 +1,8 @@
 # TA in  Air-Gap-Bastion mode install
 
+<img width="1526" alt="image" src="https://user-images.githubusercontent.com/32193129/145607735-10c93e1f-1a88-4c8d-86da-ab000019bf18.png">
+
+
 the steps to install:
 - install cloudctl a cloud  pak cli
 - define all variables at the beginning
