@@ -3,16 +3,16 @@
 the steps to install:
 - install cloudctl a cloud  pak cli
 - define all variables at the beginning
-- Download the IBM Cloud Transformation Advisor installer   - cloudctl case save
+- download the IBM Cloud Transformation Advisor installer   - cloudctl case save
 - storing the authentication credentials for all Source Docker registries  - cloudctl case launch.. --action configure-creds-airgap
 - login to the cluster
-- define variables (again??) in this only more is defined so I took definitions from here and moved them to the beginning
+- #*defined upfront*# define variables (again??) in this only more is defined so I took definitions from here and moved them to the beginning
 - create autentication credentials (again??)  - cloudctl case launch.. --action configure-creds-airgap…
-- Mirror images - cloudctl case launch.. --action mirror-images…
-- define varaible for namespace  defined this varaiable at the beginning
+- mirror images - cloudctl case launch.. --action mirror-images…
+- #*defined upfront*#  define varaible for namespace  defined this varaiable at the beginning
 - create new-project in cluster
 - configure image pull secrets and ICSP  - cloudctl case launch.. --action configure-cluster-airgap…
-- Install TA  - cloudctl case launch.. --action install…
+- install TA  - cloudctl case launch.. --action install…
 
 
 Log for all CASE activities is created in **/tmp/case/case.log**
