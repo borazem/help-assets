@@ -110,6 +110,7 @@ cloudctl case launch \
 --args "--registry $LOCAL_DOCKER_REGISTRY --user $LOCAL_DOCKER_REGISTRY_USER --pass $LOCAL_DOCKER_REGISTRY_PASSWORD --inputDir $OFFLINEDIR"
 ```
 
+skip this #############
 change the imagecontentsourcepolicy
 ```
 oc edit imagecontentsourcepolicies.operator.openshift.io ibm-transadv
@@ -121,6 +122,8 @@ add the following lines:
     - cdautil.cda.internal:8447/cp/icpa
     source: icr.io/appcafe
 ```
+############# end skip
+
 
 Install Transformation Advisor (this will fail but will continue manually)
 
@@ -133,5 +136,13 @@ cloudctl case launch \
 --args "--acceptLicense true --licenseType L-AMIK-BYM26G --installTaCatalog true --storageClass managed-nfs-storage --accessMode ReadWriteMany"
 ```
 
+```
+	cloudctl case launch \
+--case $CASE_LOCAL_PATH \
+--inventory $CASE_INVENTORY_SETUP_PRODUCT \
+--namespace $NAMESPACE \
+--action install \
+--args "--acceptLicense true --licenseType L-AMIK-BYM26G --installTaCatalog true --namespaceScoped true --registry $ENTITLED_REGISTRY --user $ENTITLED_REGISTRY_USER --pass $ENTITLED_REGISTRY_KEY true --storageClass managed-nfs-storage --accessMode ReadWriteMany"
+```
 
 
