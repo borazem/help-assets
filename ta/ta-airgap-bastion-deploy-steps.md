@@ -145,4 +145,23 @@ cloudctl case launch \
 --args "--acceptLicense true --licenseType L-AMIK-BYM26G --installTaCatalog true --namespaceScoped true --registry $ENTITLED_REGISTRY --user $ENTITLED_REGISTRY_USER --pass $ENTITLED_REGISTRY_KEY true --storageClass managed-nfs-storage --accessMode ReadWriteMany"
 ```
 
+## Create secret
 
+find a authentication json file. Could be:
+- ~/.docker/config.yson (if you are running docker logins)
+- ~/.airgap/auth.json   (if you are running cloudctl case commands)
+- ${XDG_RUNTIME_DIR}/containers/auth.json  (if you are using podman login commands) 
+
+create secret ta-pull-secret from one of the above files
+
+`oc create secret generic ta-pull-secret --from-file=.dockerconfigjson=/root/.airgap/auth.json --type=kubernetes.io/dockerconfigjson`
+
+or
+
+`oc create secret docker-registry ta-pull-secret --from-file=.dockerconfigjson=/root/.airgap/auth.json`
+
+create secret ta-pull-secret from scratch
+
+```
+oc create secret docker-registry  ta-pull-secret --docker-server $LOCAL_DOCKER_REGISTRY --docker-username="<username>" --docker-password="<password>" --docker-email="" -n ta
+```
