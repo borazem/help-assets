@@ -1,36 +1,36 @@
-		cat << EOF | oc apply -n ldap-sync -f -
-		apiVersion: batch/v1
-		kind: CronJob
-		metadata:
-		  name: ldap-group-sync
-		spec:
-		  schedule: '@hourly'
-		  suspend: false
-		  jobTemplate:
-		    spec:
-		      template:
-		        spec:
-		          serviceAccountName: ldap-sync
-		          restartPolicy: Never
-		          containers:
-		            - name: oc-cli
-		              command:
-		                - /bin/oc
-		                - adm
-		                - groups
-		                - sync
-		                - --whitelist=/ldap-sync/whitelist.txt
-		                - --sync-config=/ldap-sync/ldap-sync.yaml
-		                - --confirm
-		              image: belrapss001.eurafric-information.com:8447/registry-redhat-io/ose-cli
-		              imagePullPolicy: Always
-		              volumeMounts:
-		              - mountPath: /ldap-sync/
-		                name: config
-		                readOnly: true
-		          volumes:
-		          - name: config
-		            secret:
-		              defaultMode: 420
-		              secretName: ldap-sync
-		EOF
+cat << EOF | oc apply -n ldap-sync -f -
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ldap-group-sync
+spec:
+  schedule: '@hourly'
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+	spec:
+	  serviceAccountName: ldap-sync
+	  restartPolicy: Never
+	  containers:
+	    - name: oc-cli
+	      command:
+		- /bin/oc
+		- adm
+		- groups
+		- sync
+		- --whitelist=/ldap-sync/whitelist.txt
+		- --sync-config=/ldap-sync/ldap-sync.yaml
+		- --confirm
+	      image: belrapss001.eurafric-information.com:8447/registry-redhat-io/ose-cli
+	      imagePullPolicy: Always
+	      volumeMounts:
+	      - mountPath: /ldap-sync/
+		name: config
+		readOnly: true
+	  volumes:
+	  - name: config
+	    secret:
+	      defaultMode: 420
+	      secretName: ldap-sync
+EOF
