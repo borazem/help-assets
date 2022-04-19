@@ -1,0 +1,101 @@
+apiVersion: observability.open-cluster-management.io/v1beta2
+kind: MultiClusterObservability
+metadata:
+  name: observability
+spec:
+  advanced:
+    alertmanager:
+      replicas: 3
+      resources:
+        requests:
+          cpu: 4m
+          memory: 200Mi
+    grafana:
+      replicas: 2
+      resources:
+        requests:
+          cpu: 266m
+          memory: 100Mi
+    observatoriumAPI:
+      replicas: 2
+      resources:
+        requests:
+          cpu: 266m
+          memory: 128Mi
+    query:
+      replicas: 2
+      resources:
+        requests:
+          cpu: 266m
+          memory: 2657Mi
+    queryFrontend:
+      replicas: 2
+      resources:
+        requests:
+          cpu: 266m
+          memory: 256Mi
+    queryFrontendMemcached:
+      connectionLimit: 100
+      maxItemSize: 10m
+      memoryLimitMb: 128
+      replicas: 3
+    rbacQueryProxy:
+      replicas: 2
+      resources:
+        requests:
+          cpu: 266m
+          memory: 100Mi
+    receive:
+      replicas: 3
+      resources:
+        requests:
+          cpu: 797m
+          memory: 14236Mi
+    retentionConfig:
+      blockDuration: 2h
+      deleteDelay: 48h
+      retentionInLocal: 24h
+      retentionResolution1h: 30d
+      retentionResolution5m: 14d
+      retentionResolutionRaw: 14d
+    rule:
+      replicas: 3
+      resources:
+        requests:
+          cpu: 266m
+          memory: 512Mi
+    store:
+      replicas: 3
+      resources:
+        requests:
+          cpu: 266m
+          memory: 1024Mi
+    storeMemcached:
+      connectionLimit: 100
+      maxItemSize: 10m
+      memoryLimitMb: 128
+      replicas: 3
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+  enableDownsampling: true
+  imagePullPolicy: Always
+  imagePullSecret: multiclusterhub-operator-pull-secret
+  observabilityAddonSpec:
+    enableMetrics: true
+    interval: 60
+  storageConfig:
+    alertmanagerStorageSize: 15Gi
+    compactStorageSize: 259Gi
+    metricObjectStorage:
+      key: thanos.yaml
+      name: thanos-object-storage
+    receiveStorageSize: 186Gi
+    ruleStorageSize: 15Gi
+    storageClass: ocs-storagecluster-ceph-rbd
+    storeStorageSize: 5Gi
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      operator: Exists
