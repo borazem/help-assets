@@ -1,0 +1,97 @@
+apiVersion: observability.open-cluster-management.io/v1beta2
+kind: MultiClusterObservability
+metadata:
+  name: observability
+spec:
+  advanced:
+    alertmanager:
+      replicas: 3
+      resources:
+        limits:
+          cpu: 8m
+          memory: 400Mi
+    grafana:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 532m
+          memory: 200Mi
+    observatoriumAPI:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 532m
+          memory: 256Mi
+    query:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 532m
+          memory: 5314Mi
+    queryFrontend:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 532m
+          memory: 512Mi
+    queryFrontendMemcached:
+      replicas: 3
+    rbacQueryProxy:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 532m
+          memory: 200Mi
+    receive:
+      replicas: 3
+      resources:
+        limits:
+          cpu: 1594m
+          memory: 28472Mi
+    retentionConfig:
+      blockDuration: 2h
+      deleteDelay: 48h
+      retentionInLocal: 24h
+      retentionResolution1h: 30d
+      retentionResolution5m: 14d
+      retentionResolutionRaw: 14d
+    rule:
+      replicas: 3
+      resources:
+        limits:
+          cpu: 532m
+          memory: 1024Mi
+    store:
+      replicas: 3
+      resources:
+        limits:
+          cpu: 532m
+          memory: 2048Mi
+    storeMemcached:
+      replicas: 3
+      limits:
+        Limits:
+          cpu: 200m
+          memory: 256Mi
+  enableDownsampling: true
+  imagePullPolicy: Always
+  imagePullSecret: multiclusterhub-operator-pull-secret
+  observabilityAddonSpec:
+    enableMetrics: true
+    interval: 60
+  storageConfig:
+    alertmanagerStorageSize: 15Gi
+    compactStorageSize: 259Gi
+    metricObjectStorage:
+      key: thanos.yaml
+      name: thanos-object-storage
+    receiveStorageSize: 186Gi
+    ruleStorageSize: 15Gi
+    storageClass: ocs-storagecluster-ceph-rbd
+    storeStorageSize: 5Gi
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      operator: Exists
+  nodeSelector:
+    node-role.kubernetes.io/infra:
