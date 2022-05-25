@@ -7,18 +7,20 @@ export OFFLINE_ARCHIVE=offline.tar
 export CASE_LOCAL_PATH=$OFFLINEDIR/$CASE_ARCHIVE
 
 # variables for External registry
-export EXTERNAL_DOCKER_REGISTRY=onreg.benoibm.com:443
-export EXTERNAL_DOCKER_USER=admin
-export EXTERNAL_DOCKER_PASSWORD=ICPassw0rd#
+export EXTERNAL_DOCKER_REGISTRY_HOST=<onregserver>
+export EXTERNAL_DOCKER_REGISTRY_PORT=443
+export EXTERNAL_DOCKER_REGISTRY=$EXTERNAL_DOCKER_REGISTRY_HOST:$EXTERNAL_DOCKER_REGISTRY_PORT
+export EXTERNAL_DOCKER_USER=<user>
+export EXTERNAL_DOCKER_PASSWORD=<password>
 export EXTERNAL_DOCKER_REGISTRY_DIR=/mnt/docker_images
 # This registry dir is in the MCM portable storage device procedure a folder withing offlline directory $OFFLINE_DIR/cp4mcm-registry because the whole offline folder was compressed and transferred to the offreg server. 
 
 # variables for portable registry
-export PORTABLE_DOCKER_REGISTRY_HOST=offreg.benoibm.com
+export PORTABLE_DOCKER_REGISTRY_HOST=<offregserver>
 export PORTABLE_DOCKER_REGISTRY_PORT=443
 export PORTABLE_DOCKER_REGISTRY=$PORTABLE_DOCKER_REGISTRY_HOST:$PORTABLE_DOCKER_REGISTRY_PORT
-export PORTABLE_DOCKER_USER=admin
-export PORTABLE_DOCKER_PASSWORD=ICPassw0rd#
+export PORTABLE_DOCKER_USER=<user>
+export PORTABLE_DOCKER_PASSWORD=<password>
 export PORTABLE_DOCKER_REGISTRY_DIR=/opt/docker_images/docker_images
 
 # variables for local registry
